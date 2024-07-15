@@ -1,0 +1,90 @@
+ TELNET USING SWITCH
+enable 
+config terminal
+enable password rgukt
+interface vlan1
+ip address 10.11.13.5 255.0.0.0
+no shutdown
+exit
+line vty 0 2
+password rgukt
+login
+exit
+exit
+write memory
+
+
+
+Switch>en
+Switch#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#enable password rgukt
+Switch(config)#interface vlan1
+Switch(config-if)#ip address 10.10.10.1 255.0.0.0
+Switch(config-if)#no shutdown
+
+Switch(config-if)#exit
+Switch(config)#line vty 0 2
+Switch(config-line)#password rgukt
+Switch(config-line)#login
+Switch(config-line)#exit
+Switch(config)#exit
+Switch#write memory
+Building configuration...
+[OK]
+
+
+
+
+TELNET USING ROUTER
+
+enable
+config terminal
+enable password rgukt
+interface gig0/0/0
+ip address 10.10.10.75 255.0.0.0
+no shutdown
+line vty 0 9
+password rgukt
+login
+exit
+exit
+write memory
+
+
+
+
+ARP: Address Resolution Protocal
+DHCP: Dynamic host configuration protocol
+dns: domain name system
+class A: public-1.0.0.0 to 127.0.0.0
+	private-10.0.0.0 to 10.255.255.255
+	subnet- 255.0.0.0
+	no. of networks: 126
+
+class B: public-128.0.0.0 to 191.255.0.0
+	private-172.16.0.0 to 172.31.255.255
+	subnet- 255.255.0.0
+	no. of networks: 16382
+
+class C: public-192.0.0.0 to 223.255.255.0
+	private-192.168.0.0 to 192.168.255.255
+	subnet- 255.255.255.0
+	no. of networks: 1097150
+
+
+#DHCP on router
+enable
+config terminal
+interface gig0/0/0
+ip address 10.10.10.1 255.0.0.0
+no shutdown
+exit
+
+ip dhcp pool mynetwork
+network 10.0.0.0 255.0.0.0
+default-router 10.10.10.1
+dns-server 10.10.10.20
+exit
+exit
+write  memory

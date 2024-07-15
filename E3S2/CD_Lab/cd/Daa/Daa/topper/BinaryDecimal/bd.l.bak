@@ -1,0 +1,11 @@
+%{
+#include<stdio.h>
+#include "bd.tab.h"
+%}
+
+%%
+1	{yylval=1; return one;}
+0	{yylval=0; return zero;}
+.	{return 0;}
+%%
+int yywrap(){}

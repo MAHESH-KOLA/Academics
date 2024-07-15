@@ -1,0 +1,86 @@
+<head>
+<link rel="stylesheet" type="text/css" href="../../css/mystyle.css">
+</head>
+<body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+  </script>
+<h2>Classification</h2>
+<p>
+  In machine learning and statistics, classification is the problem of identifying to which of a set of categories (sub-populations) a new observation belongs, on the basis of a training set of data containing observations (or instances) whose category membership is known.
+
+</p>
+<p> Example is assigning a given email to the "spam" or "non-spam" class</p>
+<p>An algorithm that implements classification, especially in a concrete implementation, is known as a classifier. The term "classifier" sometimes also refers to the mathematical function, implemented by a classification algorithm, that maps input data to a category. </p>
+<h3>k-Nearest Neighbors(KNN)</h3>
+<p>k-NN is a classification algorithm, it determines which class the input data should belong to based on distance metric. An object is classified by a plurality vote of its neighbors, with the object being assigned to the class most common among its k nearest neighbors (k is a positive integer, typically small).</p>
+<p>i.e. it find a predefined number of training samples closest in distance to the new point, and predict the label from these.</p>
+<p>A commonly used distance metric for continuous variables is Euclidean distance, Manhattan and Minkowski.</p>
+<p>For discrete variables, such as for text classification, another metric can be used, such as the overlap metric (or Hamming distance)</p>
+<h4>Euclidian distance</h4>
+<p>We can measure the distance between two points using Euclidian distance is given by</p>
+<p>dist((x<sub>1</sub>, y<sub>1</sub>), (x<sub>2</sub>, y<sub>2</sub>)) = <span style="font-family:arial">&#8730;</span><span style="text-decoration:overline">(x<sub>1</sub> - x<sub>2</sub>)<sup>2</sup> + (y<sub>1</sub> - y<sub>2</sub>)<sup>2</sup></span></p>
+<p>Euclidian distance between (0,0) amd (5,5) is</p>
+<p>dist((0, 0), (5, 5)) = <span style="font-family:arial">&#8730;</span><span style="text-decoration:overline">(0-5)<sup>2</sup> + (0-5)<sup>2</sup></span></p>
+<p>dist((0, 0), (5, 5)) = <span style="font-family:arial">&#8730;</span><span style="text-decoration:overline">(-5)<sup>2</sup> + (-5)<sup>2</sup></span></p>
+<p>dist((0, 0), (5, 5)) = <span style="font-family:arial">&#8730;</span><span style="text-decoration:overline">25 + 25</p>
+<p>dist((0, 0), (5, 5)) = <span style="font-family:arial">&#8730;</span><span style="text-decoration:overline">50</p>
+<p>dist((0, 0), (5, 5)) = <span style="font-family:arial">5&#8730;</span><span style="text-decoration:overline">2</p>
+<p>dist((0, 0), (5, 5)) = <span style="font-family:arial"> 7.071</p>
+<p>If we have 3 features, (x<sub>1</sub>, y<sub>1</sub>, z<sub>1</sub>), (x<sub>2</sub>, y<sub>2</sub>, z<sub>2</sub>) distance between these points would be</p>
+<p>dist((x<sub>1</sub>, y<sub>1</sub>, z<sub>1</sub>), (x<sub>2</sub>, y<sub>2</sub>, z<sub>2</sub>)) = <span style="font-family:arial">&#8730;</span><span style="text-decoration:overline">(x<sub>1</sub> - x<sub>2</sub>)<sup>2</sup> + (y<sub>1</sub> - y<sub>2</sub>)<sup>2</sup>  + (z<sub>1</sub> - z<sub>2</sub>)<sup>2</sup> </span></p>
+<h4>Example</h4>
+<p>Consider below dataset indian cricketers with total number of mateches played in oneday international matches, total runs scored and number of wickets taken. Here our target variable is player type(Bowler, Batsman, all rounder)</p>
+<p><img src="cricketers_dataset.png" alt=""></p>
+
+<p>After split dataset into train and test </p>
+<h4>Train</h4>
+<p><img src="cricketers_train.png" alt=""></p>
+<p><img src="cricketers_y_train.png" alt=""></p>
+<h4>Test</h4>
+<p><img src="cricketers_test.png" alt=""></p>
+<p><img src="cricketers_y_test.png" alt=""></p>
+<p>Here consider 3 features Matches, Total no of Runs and Total no of Wickets</p>
+<p>dist((x<sub>1</sub>, y<sub>1</sub>, z<sub>1</sub>), (x<sub>2</sub>, y<sub>2</sub>, z<sub>2</sub>)) = <span style="font-family:arial">&#8730;</span><span style="text-decoration:overline">(x<sub>1</sub> - x<sub>2</sub>)<sup>2</sup> + (y<sub>1</sub> - y<sub>2</sub>)<sup>2</sup>  + (z<sub>1</sub> - z<sub>2</sub>)<sup>2</sup> </span></p>
+<p>dist((x<sub>1</sub>, y<sub>1</sub>, z<sub>1</sub>), (x<sub>2</sub>, y<sub>2</sub>, z<sub>2</sub>)) = <span style="font-family:arial">&#8730;</span><span style="text-decoration:overline">(x<sub>1</sub> - x<sub>2</sub>)<sup>2</sup> + (y<sub>1</sub> - y<sub>2</sub>)<sup>2</sup>  + (z<sub>1</sub> - z<sub>2</sub>)<sup>2</sup> </span></p>
+<p>Consider first testset record ie. Rohit sharma [ 201, 7808,    8]</p>
+<p>Cliculate Euclidian distance from [ 201, 7808,    8] to [463, 18426, 154]</p>
+<p>dist(( 201, 7808, 8), (463, 18426, 154)) = <span style="font-family:arial">&#8730;</span><span style="text-decoration:overline">(201 - 463)<sup>2</sup> + (7808 - 18426)<sup>2</sup>  + (8 - 154)<sup>2</sup> </span></p>
+<p>dist(( 201, 7808, 8), (463, 18426, 154)) = 10622.236</p>
+<p>Cliculate Euclidian distance from [ 201, 7808,    8] to all other trainset records</p>
+<p>Euclidian distances are</p>
+<p>
+<table class = 'table'>
+  <tr><th>Player</th><th>Euclidian distance</th></tr>
+ <tr><td>Thendulkar</td><td>10622.236</td></tr>
+ <tr><td>B.Kumar</td><td>7333.421</td></tr>
+ <tr><td>R. Ashwin</td><td>7134.981</td></tr>
+ <tr><td>Yuvraj Singh</td><td>904.689</td></tr>
+ <tr><td>I Phatan</td><td>6266.696</td></tr>
+ <tr><td>R.jedeja</td><td>5820.533</td></tr>
+ <tr><td>Kapil Dev</td><td>4032.521</td></tr>
+ <tr><td>J Srinath</td><td>6931.858</td></tr>
+ <tr><td>H Pandya</td><td>7078.811</td></tr>
+ <tr><td>Ganguly</td><td>3557.799</td></tr>
+ <tr><td>A Kumble</td><td>6878.087</td></tr>
+ <tr><td>V Kohli</td><td>2725.083</td></tr></table></p>
+ <p>Sort distances in assending order</p>
+ <table class = 'table'>
+<tr><th>Player</th><th>Euclidian distance</th></tr>
+<tr><td>Yuvraj Singh</td><td>904.689</td></tr>
+<tr><td>V Kohli</td><td>2725.083</td></tr>
+<tr><td>Ganguly</td><td>3557.799</td></tr>
+ <tr><td>Kapil Dev</td><td>4032.521</td></tr>
+ <tr><td>R.jedeja</td><td>5820.533</td></tr>
+ <tr><td>I Phatan</td><td>6266.696</td></tr>
+<tr><td>A Kumble</td><td>6878.087</td></tr>
+ <tr><td>J Srinath</td><td>6931.858</td></tr>
+<tr><td>H Pandya</td><td>7078.811</td></tr>
+ <tr><td>R. Ashwin</td><td>7134.981</td></tr>
+<tr><td>B.Kumar</td><td>7333.421</td></tr>
+ <tr><td>Thendulkar</td><td>10622.236</td></tr></tr></table></p>
+ <p>Here 3 nearest neighbors are Yuvraj Singh(all rounder),V Kohli(Batsman) and Ganguly(Batsman)</p>
+ <p> majority voting is from batsman so predected class is Batsman</p>

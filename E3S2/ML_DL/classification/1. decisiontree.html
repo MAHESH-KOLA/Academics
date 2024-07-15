@@ -1,0 +1,122 @@
+<head>
+
+
+
+</head>
+<body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+  </script>
+<h2>Classification</h2>
+<p>
+  In machine learning and statistics, classification is the problem of identifying to which of a set of categories (sub-populations) a new observation belongs, on the basis of a training set of data containing observations (or instances) whose category membership is known.
+
+</p>
+<p> Example is assigning a given email to the "spam" or "non-spam" class</p>
+<p>An algorithm that implements classification, especially in a concrete implementation, is known as a classifier. The term "classifier" sometimes also refers to the mathematical function, implemented by a classification algorithm, that maps input data to a category. </p>
+<h3>Decision Tree Classifier</h3>
+<p>A decision tree or a classification tree is a tree in which each internal (non-leaf) node is labeled with an input feature.Each leaf of the tree is labeled with a class or a probability distribution over the classes(output)</p>
+<p>Decision tree classifier try to build tree by split data based on different conditions. Its goal is to predict target class by learning simple decision rules inferred from the data features.</p>
+<p>There are many specific decision-tree algorithms. Notable ones include: </p>
+<ul><li><a href="/wiki/ID3_algorithm" title="ID3 algorithm">ID3</a> (Iterative Dichotomiser 3)</li>
+<li><a href="/wiki/C4.5_algorithm" title="C4.5 algorithm">C4.5</a> (successor of ID3)</li>
+<li><a href="/wiki/Predictive_analytics#Classification_and_regression_trees_.28CART.29" title="Predictive analytics">CART</a> (Classification And Regression Tree)</li>
+<li><a href="/wiki/CHAID" class="mw-redirect" title="CHAID">CHAID</a> (CHi-squared Automatic Interaction Detector). Performs multi-level splits when computing classification trees.<sup id="cite_ref-11" class="reference"></li>
+<li><a href="/wiki/Multivariate_adaptive_regression_splines" title="Multivariate adaptive regression splines">MARS</a>: extends decision trees to handle numerical data better.</li>
+<li>Conditional Inference Trees. Statistics-based approach that uses non-parametric tests as splitting criteria, corrected for multiple testing to avoid overfitting. This approach results in unbiased predictor selection and does not require pruning.</li></ul>
+<p>Algorithms for constructing decision trees usually work top-down, by choosing a variable at each step that best splits the set of items.Different algorithms use different metrics</p>
+<p>These generally measure the homogeneity of the target variable within the subsets.</p>
+<p><b>Metrics</b></p>
+<ul>
+  <li>Information gain</li>
+  <li>Gini impurity</li>
+  <li>Variance reduction</li>
+</ul>
+<p><b>Information gain</b></p>
+<p>Information gain is based on the concept of entropy.
+</p>
+<p>
+Entropy is defined as below
+</p>
+<p>
+  <b>Entropy</b>
+<p>  Entropy H ( S ) is a measure of the amount of uncertainty in the (data) set S.</p>
+<p><img src="entropy.svg" alt=""></p>
+<p>Where,</p>
+<ul>
+    <li>S  - The current dataset for which entropy is being calculated
+    <li>X - The set of classes in S
+    <li>p ( x ) - The proportion of the number of elements in class x to the number of elements in set S
+    </ul>
+When H ( S ) = 0 the set S is perfectly classified (i.e. all elements in S are of the same class).
+
+<p>
+  <b>Information gain</b>
+  <p>Information gain I G ( A ) is the measure of the difference in entropy from before to after the set S is split on an attribute A. In other words, how much uncertainty in S was reduced after splitting set  S on attribute A. </p>
+<p><img src="Info_gain.svg" alt=""></p>
+
+<p>Where,</p>
+<ul>
+    <li>H(S)  - Entropy of set S
+    <li>T -The subsets created from splitting set S by attribute A such that <img src="i_g2.svg" alt="">
+    <li>p ( t ) - The proportion of the number of elements in class t to the number of elements in set S
+      <li>H(t) entropy of subset t</li>
+    </ul>
+</p>
+<p>
+  <b>Example</b>
+  <p>Here we are taking play golf dataset</p>
+  <img src="dataset.png" alt="">
+  <p>Entropy of entire dataset(Play Golf) from the above formula</p>
+  <p>there are two classes(Yes, No)</p>
+  <p><table border = "2" style="border-collapse:collapse"><tr><th colspan = 2>Play Golf</th></tr>
+    <tr><td>Yes</td><td>No</td></tr>
+    <tr><td>9</td><td>5</td></tr>
+  </table></p>
+  <p>H(play golf) = -(5/(5+9))* log<sub>2</sub>(5/(5+9))-(9/(5+9))* log<sub>2</sub>(9/(5+9))</p>
+  <p>H(play golf) = 0.53 + 0.41</p>
+  <p>H(play golf) = 0.94</p>
+
+  <p>Entropy of Outlook</p>
+  <p>Entropy(Play Golf, Outlook)</p>
+  <p> = P(Rainy)*H(2,3)+P(Overcast)*H(4,0)+P(Sunny)*H(3,2)</p>
+  <p> = 0.693</p>
+
+  <p><b>Information Gain</b></p>
+  <p>After splitting dataset with outlook attribute information gain is</p>
+  <p>IG(Outlook) = H(Play Golf) - H(Play Golf, Outlook)</p>
+  <p> = .94 - 0.69</p>
+  <p> = 0.24</p>
+  <p>The information gain for other three attributes are:</p>
+  <p>IG(Temp) = H(Play Golf) - H(Play Golf, Temp)</p>
+  <p> = .94 - 0.911</p>
+  <p> = 0.029</p>
+
+  <p></p>
+  <p>IG(Humidity) = H(Play Golf) - H(Play Golf, Humidity)</p>
+  <p> = .094 - 0.788</p>
+  <p> = 0.152</p>
+  <p></p>
+  <p>IG(Windy) = H(Play Golf) - H(Play Golf, Windy)</p>
+  <p> = .094 - 0.892</p>
+  <p> = 0.048</p>
+
+  <p> from the above four attributes Outlook is having the highest information gain so split the dataset by using outlook attibute</p>
+  <p>and the process will continue until all children nodes are pure, or until the information gain is 0</p>
+  <p>After spliting dataset into two parts with Outlook</p>
+  <p>first part will be</p>
+  <p><img src="dataset2_overcast.png" alt=""></p>
+  <p>this is leaf node because it is pure node(contains all yes) or information gain is zero so we should not split it further</p>
+  <p>second part will be</p>
+  <p><img src="dataset1.png" alt=""></p>
+  <p>this is not pure node we need to split again</p>
+  <p>if we compute information gain after splitting with four features respective information gains are:</p>
+  <p>IG(Outlook) = -0.030</p>
+  <p>IG(Temp) = 0.179</p>
+  <p>IG(Humidity) = 0.218</p>
+  <p>IG(Windy) = 0.065</p>
+  <p>Here splitting with Humidity giving highest information gain so split with Humidity. repeate the same process till all nodes are pure</p>
+</p>

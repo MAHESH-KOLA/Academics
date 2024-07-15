@@ -1,0 +1,67 @@
+<head>
+<link rel="stylesheet" type="text/css" href="../../css/mystyle.css">
+</head>
+<body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+  </script>
+<h2>Support-vector machine(SVM)</h2>
+<p>Support-vector machines are supervised learning models with associated learning algorithms that analyze data used for classification and regression analysis.</p>
+<p>Suppose some given data points each belong to one of two classes, and the goal is to decide which class a new data point will be in.</p>
+<p><img src = 'Svm_separating_hyperplanes.png' width = '400' height= 'auto' />
+<p> In the case of support-vector machines, a data point is viewed as a p-dimensional vector, and we want to know whether we can separate such points with a ( p − 1 ) dimensional hyperplane.</p>
+<p>There are many hyperplanes that might classify the data.</p>
+<p>One reasonable choice as the best hyperplane is the one that represents the largest separation, or margin, between the two classes</p>
+<p>So we choose the hyperplane so that the distance from it to the nearest data point on each side is maximized</p>
+<p> If such a hyperplane exists, it is known as the maximum-margin hyperplane and the linear classifier it defines is known as a maximum margin classifier. </p>
+<h4>Linear SVM</h4>
+<p>We are given a training dataset of n points of the form (x1,y1),(x2,y2),(x3,y3), ....(xn,yn)</p>
+<p>where the y<sub>i</sub> are either 1 or −1, each indicating the class to which the point x<sub>i</sub> belongs.</p>
+<p>We want to find the "maximum-margin hyperplane" that divides the group of points x<sub>i</sub> for which y<sub>i</sub> = 1 from the group of points for which y<sub>i</sub> = − 1, which is defined so that the distance between the hyperplane and the nearest point x<sub>i</sub> from either group is max<sub>i</sub>mized. </p>
+<p>Any hyperplane can be written as the set of points x satisfy<sub>i</sub>ng <b>w.x - b = 0</b> where <b>⋅</b> denotes the dot product. The vector w is a Surface normal | normal vector: it is perpendicular to the hyperplane.  x is the feature vector, and b is the bias</p>
+<p>  Anything above the decision boundary should have label 1 i.e w.x-b >0 will have corresponding y<sub>i</sub>= 1. Similarly, anything below the decision boundary should have label−1 i.e w.x-b < 0 will have corresponding y<sub>i</sub>= -1
+</p>
+
+<p>If the training data is linearly separable, we can select two parallel hyperplanes that separate the two classes of data, so that the distance between them is as large as possible. The region bounded by these two hyperplanes is called the "margin", and the max<sub>i</sub>mum-margin hyperplane is the hyperplane that lies halfway between them, these hyperplanes can be described by the equations </p>
+
+<p>w.x-b = 1 (anything on or above this boundary is of one class, with label 1)</p>
+<p>w.x-b = -1  (anything on or below this boundary is of the other class, with label −1)</p>
+<p><b>We want to choose the w and b to maximize the margin</b>
+
+<p><img src = 'SVM_margin.png' width = '400' height= 'auto' /> 
+
+<p>By using geometry, we find the distance between these two hyperplanes is 2/ ‖ w ‖, so we want to minimize ‖ w ‖</p>
+<p>We also have to prevent data points from falling into the margin, we add the following constraint: for each i either
+ w.x<sub>i</sub>+b >= 1 for x<sub>i</sub> of the first class(ie y<sub>i</sub>= 1) or w.x<sub>i</sub>+b <= -1 for x<sub>i</sub> of the second class(ie y<sub>i</sub>= -1)  </p>
+<p><b>These constraints state that each data point must lie on the correct side of the margin.</b> </p>
+<p>This can be rewritten as
+
+    y<sub>i</sub> ( w.x<sub>i</sub> - b ) ≥ 1 ,  for all  1 ≤ i ≤ n .</p> 
+<p>We can put this together to get the optimization problem</p>
+<p>"Minimize(in w, b) ||w|| </p>
+<p>subject to y<sub>i</sub> ( w. x<sub>i</sub> + b ) ≥ 1 for i = 1 , … , n "</p>
+<p>the max-margin hyperplane is completely determined by those x<sub>i</sub> that lie nearest to it. These x<sub>i</sub> are called support vectors. </p>
+
+
+<h4>Soft-margin</h4>
+<p>Consider the case that your data isn’t perfectly linearly separable. For instance,maybe you aren’t guaranteed that all your data points are correctly labelled, soyou want to allow some data points of one class to appear on the other side ofthe boundary.</p>
+<p>We can introduceslack variables- an Ei≥0 for each x<sub>i</sub>.</p>
+<p>y<sub>i</sub> ( w. x<sub>i</sub> + b ) ≥ 1-Ei,  for all  1 ≤ i ≤ n</p>
+<h4>Nonlinear decision boundary</h4>
+<p>Some problems can’t be solved using linear hyperplane</p>
+<p>It is not possible to find a hyperplane or a linear decision boundary for some classification problems. If we project the data in to a higher dimension from the original space, we may get a hyperplane in the projected dimension that helps to classify the data.</p>
+<p><img src = 'svm.png'/>
+<p>Mapping your data vectors,x<sub>i</sub>, into a higher-dimension (even infinite) featurespace may make them linearly separable in that space (whereas they may notbe  linearly  separable  in  the  original  space)</p>
+<p>As we shown in the above figure, it is impossible to find a single line to separate the two classes (green and blue) in the input space. But, after projecting the data in to a higher dimension (i.e. feature space in the figure), we could able to find the hyperplane which classifies the data. Kernel helps to find a hyperplane in the higher dimensional space without increasing the computational cost much. Usually, the computational cost will increase, if the dimension of the data increases.</p>
+
+<p>Linear Kernel</p>
+<p>Polynomial Kernel </p>
+<p>Radial Basis Function Kernel </p>
+
+<Code>
+
+
+

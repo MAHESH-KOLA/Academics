@@ -1,0 +1,254 @@
+//program : counting No.of digits in binary number
+
+//.l file-------------------------------------------
+
+%{
+#include <stdio.h>
+#include "y.tab.h"
+//yylval = atoi(yytext);return digit;
+%}
+%%
+[01] {yylval = atoi(yytext);return digit;}
+%%
+int yywrap()
+{
+
+}
+
+//.y file-----------------------------------------
+
+%{
+  #include <stdio.h>
+  int count = 0,c1 = 0;
+%}
+%token digit
+%%
+N : L {printf("No.of bits : %d\n",c1);return 0;}
+|L '\n';
+L : L B {c1 = count;}
+L : B {c1 = count;}
+B : digit {count = count+1;}
+;
+%%
+
+void main()
+{
+   yyparse();
+}
+void yyerror(char *s)
+{
+
+}
+
+//program : postfix expression
+
+// .l file-----------------------------------------
+
+#include "y.tab.h"
+void yyerror(char *s);
+%}
+
+%%
+[0-9]+ {yylval = atoi(yytext);return id;}
+[+/*-] {return yytext[0];}
+%%
+int yywrap(void){
+return 1;
+}
+
+//.y file-----------------------------------------
+
+%{
+#include<stdio.h>
+int yylex(void);
+void yyerror(char *s);
+%}
+
+%token id
+%left '+' '-'
+%left '*' '/'
+
+%%
+E1 : E '\n' {return 0;}
+| E {} ;
+E : E '+' T {printf("+");}
+| E '-' T {printf("-");}
+| T {} ;
+T : T '*' F {printf("*");}
+| T '/' F {printf("/");}
+| F {} ;
+F : id {printf("%d",$1);}
+;
+%%
+
+int main(void){
+yyparse();
+return 0;
+
+}
+ void yyerror(char *s)
+ {}
+ 
+//program : conversion of Binary number to decimal number
+
+//.l file----------------------------------------
+
+%{
+#include <stdio.h>
+#include "y.tab.h"
+%}
+%%
+[01] {yylval = atoi(yytext);return digit;}
+%%
+int yywrap()
+{
+  return 1;
+}
+
+//.y file----------------------------------------
+
+%{
+  #include <stdio.h>
+  void yyerror(char *s);
+%}
+%token digit 
+%%
+S :  L {$$ = $1;printf("Decimal Value : %d\n",$$);};
+
+;
+L : L B {$$ = 2*$1 + $2;}
+| B {$$ = $1;} 
+B : digit {$$ = $1;}
+;
+%%
+
+void main()
+{
+   yyparse();
+}
+void yyerror(char *s)
+{
+
+}
+
+//program : paranthesis Checking
+
+//.l file-----------------------------------------
+
+%{
+#include <stdio.h>
+#include "y.tab.h"
+%}
+%%
+[()\n] {return yytext[0];}
+%%
+int yywrap()
+{return 1;}
+
+//.y file-----------------------------------------
+
+%{
+#include <stdio.h>
+void yyerror(char *s);
+int flag = 0;
+%}
+%token '(' ')' '\n'
+%%
+N : L '\n' {printf("Valid\n");flag = 1;return 0;}
+;
+L : L '(' L ')' {}
+|  {}
+;
+%%
+void main()
+{
+   yyparse();
+   if(flag == 0) printf("Invalid");
+}
+void yyerror(char *s)
+{
+
+}
+
+//calc.l
+%{
+#include<stdio.h>
+#include "y.tab.h"
+%}
+%%
+[0-9]+ {yylval=atoi(yytext);return id;}
+[()+/*-] {return yytext[0];}
+%%
+int yywrap()
+{return 1;}
+
+//calc.y
+
+%{
+#include<stdio.h>
+void yyerror(char *s);
+int flag=0;
+%}
+%token id
+%left '+' '-'
+%left '/' '*'
+%left '(' ')'
+%%
+e1:e{printf("valid");flag=1;printf("%d",$$);}
+;
+e:e'+'e {$$=$1+$3;}
+e:e'-'e{$$=$1-$3;}
+e:e'*'e {$$=$1*$3;}
+e:e'/'e {$$=$1/$3;}
+e:'('e')' {$$=$2;}
+e:id {$$=$1;}
+;
+%%
+int main()
+{
+	yyparse();
+	//if(flag==1)
+	//printf("valid");
+}
+void yyerror(char *s)
+{
+printf("invalid");
+}
+
+//parent_checking
+
+%{
+#include<stdio.h>
+#include "y.tab.h"
+%}
+%%
+[()\n] {return yytext[0];}
+%%
+int yywrap()
+{
+return 1;
+}
+
+//.y
+%{
+#include<stdio.h>
+int flag=0,c1=0;
+%}
+%token '(' ')'
+%%
+N : L '\n' {printf("valid");flag=1;return 0;}
+    ;
+L : L '(' L ')' {}
+  | {}
+   ;
+%%
+void main()
+{
+yyparse();
+//printf("%d",c1);
+}
+void yyerror(char *s)
+{printf("invalid");}
+
+
+

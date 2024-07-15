@@ -1,0 +1,333 @@
+<head>
+<link rel="stylesheet" type="text/css" href="../../css/mystyle.css">
+</head>
+<body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+  </script>
+<h2>Classification</h2>
+<p>
+  In machine learning and statistics, classification is the problem of identifying to which of a set of categories (sub-populations) a new observation belongs, on the basis of a training set of data containing observations (or instances) whose category membership is known.
+
+</p>
+<p> Example is assigning a given email to the "spam" or "non-spam" class</p>
+<p>An algorithm that implements classification, especially in a concrete implementation, is known as a classifier. The term "classifier" sometimes also refers to the mathematical function, implemented by a classification algorithm, that maps input data to a category. </p>
+<h3>Navie Bayes Classifier</h3>
+<p>In machine learning, naive Bayes classifiers are a family of simple "probabilistic classifiers" based on applying Bayes' theorem with strong (naive) independence assumptions between the features. </p>
+<p>Bayes classifiers assume that the value of a particular feature is independent of the value of any other feature, given the class variable. For example, a fruit may be considered to be an apple if it is red, round, and about 10 cm in diameter. A naive Bayes classifier considers each of these features to contribute independently to the probability that this fruit is an apple, regardless of any possible correlations between the color, roundness, and diameter features. </p>
+<p>An advantage of naive Bayes is that it only requires a small number of training data to estimate the parameters necessary for classification.</p>
+<h3>Bayes' theorem</h3>
+<p>Bayes' theorem shows the relation between a conditional probability. the probability of a hypothesis given some observed pieces of evidence</p>
+<h4>Formula</h4>
+<p><img src="bayes_formula.svg" alt=""></p>
+<p>where</p><p>
+  <ul>
+    <li>P(A) is the <b>prior probability</b> of A. It is <b>"prior"</b> in the sense that it does not take into account any information about B. </li>
+    <li>P(A|B) is the conditional probability of A, given B. It is also called the <b>posterior probability</b> because it is derived from or depends upon the specified value of B.</li>
+    <li>P(B|A) is the conditional probability of B given A. It is also called the <b>likelihood</b>.</li>
+    <li>P(B) is the <b>prior probability</b> of B, and acts as a normalizing constant.</li>
+  </ul>
+</p>
+<p>In plain English, using Bayesian probability terminology, the above equation can be written as</p>
+<p><img src="bayes_eng_formula.svg" alt=""></p>
+<h4>Example</h4>
+<p>There is a 40% chance of it raining on Sunday. If it rains on Sunday, there is a 10% chance it will rain on Monday. If it didn't rain on Sunday, there's an 80% chance it will rain on Monday. </p>
+<p>"Raining on Sunday" is event A, and "Raining on Monday" is event B. </p>
+<p>
+  <ul>
+    <li>P( A ) = 0.40 = Probability of Raining on Sunday.</li>
+    <li>P( B | A ) = 0.10 = Probability of it raining on Monday, if it rained on Sunday.</li>
+    <li>P( B | A' ) = 0.80 = Probability of it raining on Monday, if it did not rain on Sunday.</li>
+  </ul>
+</p>
+<p>The first thing we'd normally calculate is the probability of it raining on Monday: This would be the sum of the probability of "Raining on Sunday and raining on Monday" and "Not raining on Sunday and raining on Monday" </p>
+<p><img src="bayes_exaple1.svg" alt=""></p>
+<p>
+  <ul>
+    <li>P( B ) = 0.52 = Probability of Raining on Monday.</li>
+  </ul>
+</p>
+<p>what if we said: "It rained on Monday. What is the probability it rained on Sunday?" That is where Bayes' theorem comes in. It allows us to calculate the probability of an earlier event, given the result of a later event. </p>
+<p>So, to calculate the probability it rained on Sunday, given that it rained on Monday: </p>
+<p><img src="bayes_formula.svg" alt=""></p>
+<p>or</p>
+<p><p><img src="bayes_exaple2.svg" alt=""></p></p>
+<p>In other words, if it rained on Monday, there's a 7.69% chance it rained on Sunday. </p>
+<h3>Probabilistic model</h3>
+<p> given a problem instance to be classified, represented by a vector x = ( x<sub>1</sub>, ...,x<sub>n</sub>) representing some n features (independent variables), it assigns to this instance probabilities </p>
+<p><img src="bayes_expr1.svg" alt=""></p>
+<p>for each of <b>K</b> possible outcomes or classes C<sub>k</sub></p>
+<p>Using Bayes' theorem, the conditional probability can be decomposed as </p>
+<p><img src="bayes_prob_formula.svg" alt=""></p>
+<p>Here <b>x</b> = ( x<sub>1</sub>,x<sub>2</sub> ...,x<sub>n</sub>)</p>
+<p>In practice, there is interest only in the numerator of that fraction, because the denominator does not depend on C and the values of the features x<sub>i</sub> are given, so that the denominator is effectively constant.</p>
+<p>So</p>
+<p><i>p</i>(C<sub>k</sub> | <b>x</b>) = <i>p</i>(C<sub>k</sub>) <i>p</i>(<b>x</b> | C<sub>k</sub>)</p>
+<p><i>p</i>(C<sub>k</sub> | <b>x<sub>1</sub>,x<sub>2</sub> ...,x<sub>n</sub></b>) = <i>p</i>(C<sub>k</sub>) <i>p</i>(<b>x<sub>1</sub></b> | C<sub>k</sub>) <i>p</i>(<b>x<sub>2</sub></b> | C<sub>k</sub>) <i>p</i>(<b>x<sub>3</sub></b> | C<sub>k</sub>) <i>p</i>(<b>x<sub>4</sub></b> | C<sub>k</sub>) </p>
+<p>Here k = 1,2,3,.....k</p>
+<p>y_pred = argmax{<i>p</i>(C<sub>1</sub> | <b>x<sub>1</sub>,x<sub>2</sub> ...,x<sub>n</sub></b>),<i>p</i>(C<sub>2</sub> | <b>x<sub>1</sub>,x<sub>2</sub> ...,x<sub>n</sub></b>), ..., <i>p</i>(C<sub>k</sub> | <b>x<sub>1</sub>,x<sub>2</sub> ...,x<sub>n</sub></b>)}</p>
+<h3>Game Prediction using Navie Bayes</h3>
+<p>We are taking Play Golf Dataset.</p>
+<p style="overflow-x:auto;">
+  <img src="Play_Golf_data.png" alt="">
+</p>
+<p>Here we concedering only two features Outlook and Humidity. now our dataset look like below</p>
+<p><img src="Play_Glolf_2features.png" alt=""></p>
+<p>
+We need to find the player will play or not if outlook is sunny and Humidity is Normal. Here we have only two classes Yes(Class1) and No(Class2). We need to find the probability for Class1(Yes) and Class2(No)</p>
+<p>
+After finding probability for playing and probability for not playing from them find the max probability class as final prediction
+</p>
+<p><b>Probability for Players will play if outlook is sunny and Humidity is Normal.</b></p>
+<p>P(Yes | [Sunny,Normal]) = P(Yes) * P( Sunny | Yes) * P( Normal | Yes)</p>
+<p>P(yes) = (9/14)*(3/9)*(6/9)</p>
+<p>0.143</p>
+<p>P(No | [Sunny,Normal]) = P(No) * P( Sunny | No) * P( Normal | No) </p>
+<p>P(no) = (5/14)*(2/5)*(1/5)</p>
+<p>0.028</p>
+<p>After normalizing<br>
+  P(Yes) = 0.83<br>
+  P(No) = 0.17<br>
+</p>
+
+<p>Probability for playing(83%) is more than not playing(17%). So our model predition is players will play if Outlook is sunny and Humidity is normal</p>
+</p>
+<h3>Scikit-learn implementations of Navie Bayes</h3>
+<p>Scikit-learn has four implementations for Navie Bayes.The different naive Bayes classifiers differ mainly by the assumptions they make regarding the feature distribution</p>
+<p><ol>
+  <li>Gaussian Naive Bayes</li>
+  <li>Multinomial Naive Bayes</li>
+  <li>Bernoulli Naive Bayes</li>
+  <li>Complement Naive Bayes</li>
+</ol></p>
+<h4>Gaussian Naive Bayes</h4>
+<p>The likelihood of the features is assumed to be Gaussian. It is useful if features are continuous</p>
+<p>Then, the probability distribution of v  given a class C<sub>k</sub>, p ( x = v &#x2223; C<sub>k</sub> ), can be computed by plugging v  into the equation for a Normal distribution parameterized by &#x03BC;<sub>k</sub> and &#x03C3;<sub>k</sub><sup>2</sup>. That is</p>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <mi>P</mi>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mi>x = v</mi>
+  </msub>
+  <mo>&#x2223;<!-- ∣ --></mo>
+  <msub>
+    <mi>C</mi>
+    <mi>k</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mfrac>
+    <mn>1</mn>
+    <msqrt>
+      <mn>2</mn>
+      <mi>&#x03C0;<!-- π --></mi>
+      <msubsup>
+        <mi>&#x03C3;<!-- σ --></mi>
+        <mi>k</mi>
+        <mn>2</mn>
+      </msubsup>
+    </msqrt>
+  </mfrac>
+  <mi>exp</mi>
+  <mo>&#x2061;<!-- ⁡ --></mo>
+  <mrow>
+    <mo>(</mo>
+    <mrow>
+      <mo>&#x2212;<!-- − --></mo>
+      <mfrac>
+        <mrow>
+          <mo stretchy="false">(</mo>
+          <msub>
+            <mi>v</mi>
+          </msub>
+          <mo>&#x2212;<!-- − --></mo>
+          <msub>
+            <mi>&#x03BC;<!-- μ --></mi>
+            <mi>k</mi>
+          </msub>
+          <msup>
+            <mo stretchy="false">)</mo>
+            <mn>2</mn>
+          </msup>
+        </mrow>
+        <mrow>
+          <mn>2</mn>
+          <msubsup>
+            <mi>&#x03C3;<!-- σ --></mi>
+            <mi>k</mi>
+            <mn>2</mn>
+          </msubsup>
+        </mrow>
+      </mfrac>
+    </mrow>
+    <mo>)</mo>
+  </mrow>
+</math>
+</p>
+<p>The parameters
+  <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>&#x03C3;<!-- σ --></mi>
+    <mi>k</mi>
+  </msub>
+</math>
+and <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>&#x03BC;<!-- μ --></mi>
+    <mi>k</mi>
+  </msub>
+</math> are estimated using maximum likelihood.</p>
+<p>
+<h4>Sex classification Example</h4>
+Problem: classify whether a given person is a male or a female based on the measured features. The features include height, weight, and foot size.
+</p>
+<p>
+  <table class="table">
+
+<tbody><tr>
+<th>Person</th>
+<th>height (feet)</th>
+<th>weight (lbs)</th>
+<th>foot size(inches)
+</th></tr>
+<tr>
+<td>male</td>
+<td>6</td>
+<td>180</td>
+<td>12
+</td></tr>
+<tr>
+<td>male</td>
+<td>5.92 (5'11")</td>
+<td>190</td>
+<td>11
+</td></tr>
+<tr>
+<td>male</td>
+<td>5.58 (5'7")</td>
+<td>170</td>
+<td>12
+</td></tr>
+<tr>
+<td>male</td>
+<td>5.92 (5'11")</td>
+<td>165</td>
+<td>10
+</td></tr>
+<tr>
+<td>female</td>
+<td>5</td>
+<td>100</td>
+<td>6
+</td></tr>
+<tr>
+<td>female</td>
+<td>5.5 (5'6")</td>
+<td>150</td>
+<td>8
+</td></tr>
+<tr>
+<td>female</td>
+<td>5.42 (5'5")</td>
+<td>130</td>
+<td>7
+</td></tr>
+<tr>
+<td>female</td>
+<td>5.75 (5'9")</td>
+<td>150</td>
+<td>9
+</td></tr>
+</tbody></table>
+</p>
+<p>The classifier created from the training set using a Gaussian distribution assumption would be</p>
+<p>
+  <div style="overflow-x:auto;">
+  <table class="table">
+
+<tbody><tr>
+<th>Person</th>
+<th>mean (height)</th>
+<th>variance (height)</th>
+<th>mean (weight)</th>
+<th>variance (weight)</th>
+<th>mean (foot size)</th>
+<th>variance (foot size)
+</th>
+</tr>
+<tr>
+<td>male</td>
+<td>5.855</td>
+<td>0.035</td>
+<td>176.25</td>
+<td>122.916</td>
+<td>11.25</td>
+<td>0.916
+</td></tr>
+<tr>
+<td>female</td>
+<td>5.4175</td>
+<td>0.097</td>
+<td>132.5</td>
+<td>558.333</td>
+<td>7.5</td>
+<td>1.6667
+</td></tr>
+
+</tbody></table></div></p>
+<p>Let's say we have equiprobable classes so P(male)= P(female) = 0.5. This prior probability distribution might be based on our knowledge of frequencies in the larger population, or on frequency in the training set. </p>
+<p>Below is a sample to be classified as male or female. </p>
+<p><table class="table">
+
+<tbody><tr>
+<th>Person</th>
+<th>height (feet)</th>
+<th>weight (lbs)</th>
+<th>foot size(inches)
+</th></tr>
+<tr>
+<td>sample</td>
+<td>6</td>
+<td>130</td>
+<td>8
+</td></tr></tbody></table></p>
+<p>We wish to determine which posterior is greater, male or female. For the classification as male the posterior is given by </p>
+<p><img src="bayes_posterior_male.svg" alt=""></p>
+<p>For the classification as female the posterior is given by </p>
+<p><img src="bayes_posterior_female.svg" alt=""></p>
+<p>The evidence is a constant and thus scales both posteriors equally can be ignored.</p>
+<p><img src="bayes_gaussian_formula.svg" alt=""></p>
+<p>where <i>&#x03BC;</i> = 5.855 and <i>&sigma;<sup>2</sup></i> = 0.035 are the parameters of normal distribution which have been previously determined from the training set. Note that a value greater than 1 is OK here - it is a probability density rather than a probability, because height is a continuous variable. </p>
+<p>
+  <table class="table">
+
+  <tbody><tr>
+  <th>Male</th>
+  <th>Female</th>
+  </th></tr>
+  <tr>
+  <td>P(male) = 0.5</td>
+  <td>P(female) = 0.5</td>
+  </tr>
+  <tr>
+  <td><i>p</i>(heigt | male) = 1.578</td>
+  <td><i>p</i>(heigt | female) = 0.223</td>
+  </tr>
+  <tr>
+  <td><i>p</i>(weigt | male) = 5.9867e<sup>-06</sup></td>
+  <td><i>p</i>(weigt | female) = 0.0167</td>
+  </tr>
+  <tr>
+  <td><i>p</i>(foot size | male) = 0.0013</td>
+  <td><i>p</i>(foot size | female) = 0.2866</td>
+  </tr>
+  <tr>
+  <td><b>posterior numerator(male) = 6.19707e<sup>-09</sup></b></td>
+  <td><b>posterior numerator(female) = 0.00053</b></td>
+  </tr>
+  </tbody></table>
+</p>
+<p>Since posterior numerator is greater in the female case, we predict the sample is female.</p>

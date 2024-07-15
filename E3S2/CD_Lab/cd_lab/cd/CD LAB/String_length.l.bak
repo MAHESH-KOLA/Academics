@@ -1,0 +1,27 @@
+%{
+#include<stdio.h>
+int length;
+int print(int);
+%}
+
+%%
+[A]*[a-zA-Z0-9]+ {length=yyleng;
+		   print(length);}
+%%
+main()
+{
+    printf("Enter any string:");
+    yylex();
+}
+print(int length)
+{
+    if(length==3)
+      printf("\nString of length 3 is: %s",yylex();
+    else
+      printf("\nStrinf of length greater than 3 is: %s",yytext);
+    return 0;
+}
+int yywrap()
+{
+   return 1;
+}

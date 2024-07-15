@@ -1,0 +1,29 @@
+%{
+#include <stdio.h>
+int i;
+%}
+
+%%
+[0-9]+ {i=atoi(yytext);
+if(i%2==0)
+{
+printf("it is even");
+}
+else
+{
+printf("it is odd");
+}
+}
+[a-zA-Z]+ {printf("not even not odd");}
+%%
+
+int main()
+{
+printf("enter the number:");
+yylex();
+}
+
+int yywrap()
+{
+return 1;
+}

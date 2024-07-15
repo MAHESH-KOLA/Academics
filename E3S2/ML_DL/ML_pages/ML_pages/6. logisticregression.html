@@ -1,0 +1,237 @@
+<h2>Classification</h2>
+<p>
+  In machine learning and statistics, classification is the problem of identifying to which of a set of categories (sub-populations) a new observation belongs, on the basis of a training set of data containing observations (or instances) whose category membership is known.
+</p>
+<p> Example is assigning a given email to the "spam" or "non-spam" class</p>
+<p>An algorithm that implements classification, especially in a concrete implementation, is known as a classifier. The term "classifier" sometimes also refers to the mathematical function, implemented by a classification algorithm, that maps input data to a category. </p>
+<h3>Regression</h3>
+Regression is used to explain the relationship between one dependent variable and one or more independent variables. In  regression dependent variable must be measured on a continuous measurement scale (e.g. 0-100 test score)
+<p>So regression can't be directly used for classifcation problems because classification problems expect its out as set of categories not continuous values</p>
+<p>We can use both regression and standard logistic function to solve classifcation problems</p>
+
+<p><b>Standard Logistic function</b></p>
+<p>In order to map predicted values to probabilities, we use the Standard Logistic(sigmoid) function. The function maps any real value into another value between 0 and 1.</p>
+<p>
+  &sigma;(y) = 1/(1+e<sup>-y</sup>)
+</p>
+<p>Here
+<ul>
+  <li>&sigma;(y) = output between 0 and 1 (probability estimate)</li>
+<li>y = input to the function (your algorithm's prediction e.g. b<sub>0</sub>+b<sub>1</sub>x)</li>
+<li>e = base of natural log</li>
+</ul>
+</p>
+
+<h3>Logistic Regression</h3>
+<p>
+  <b>Logistic regression</b> is a classification algorithm used to assign observations to a discrete set of classes. Unlike regression which outputs continuous number values, logistic regression transforms its output into probability by applying logistic function which can then be mapped to two or more discrete classes.
+</p>
+
+<h3>Binary Logistic Regression</h3>
+<p><b>Binary Logistic regression</b> predicts the probability of an outcome that can only have two values</p>
+
+<p>logistic regression produces a logistic curve, by using sigmoid function which limits values between 0 and 1.</p>
+<p>
+  <img src="/home/laxmi/Web Dev/images/LogReg_1.png" alt="logisticRegression image">
+</p>
+<p>In the logistic regression the constant (b<sub>0</sub>) moves the curve left and right and the slope (b<sub>1</sub>) defines the steepness of the curve.</p>
+<p>logistic regression can handle any number of numerical and/or categorical variables.</p>
+<p><img src="/home/laxmi/Web Dev/images/LogReg_eq.png" alt="logisticRegression equation"></p>
+<p><b>Decision Boundary</b></p>
+<p>
+  Our current prediction function returns a probability score between 0 and 1. In order to map this to a discrete class (true/false, cat/dog), we select a threshold value above which we will classify values into class 1 and below which we classify values into class 2.
+</p>
+<p>p>=0.5,class=1</p>
+<p>p<0.5,class=0</p>
+<p><b>Loss function</b></p>
+<p>
+  We can't use Mean Squared Error, we use a cost function called Cross-Entropy, also known as Log Loss.
+</p>
+<p>
+  <ol>
+    <li>  In binary classification, where the number of classes M equals 2, cross-entropy can be calculated as:<br>
+    <p>-(ylog(p)+(1-y)log(1-p))</li></p>
+    <li>If M>2 (i.e. multiclass classification), we calculate a separate loss for each class label per observation and sum the result.</li><br>
+    - <b>&Sigma;</b><sup>M</sup><sub>c=1</sub> y<sub>o, c</sub>log(p<sub>o, c</sub>)
+  </ol>
+  <p>
+    Here
+    <ul>
+      <li>M - number of classes (dog, cat, fish)</li>
+      <li>log - the natural log</li>
+      <li>y - binary indicator (0 or 1) if class label c is the correct classification for observation o</li>
+      <li>p - predicted probability observation o is of class c</li>
+    </ul>
+  </p>
+</p>
+<p><b><h3>Example</h3></b></p>
+<p><b>Probability of passing an exam versus hours of study</b></p>
+<p>
+  Suppose we wish to answer the following question:
+</p><p style = "padding-left:40px">
+<b>A group of 20 students spend between 0 and 6 hours studying for an exam. How does the number of hours spent studying affect the probability that the student will pass the exam?
+</b></p><p >
+The reason for using logistic regression for this problem is that the values of the dependent variable, pass and fail, while represented by "1" and "0", are not cardinal numbers. If the problem was changed so that pass/fail was replaced with the grade 0 - 100 (cardinal numbers), then simple regression analysis could be used.
+</p><p>
+The table shows the number of hours each student spent studying, and whether they passed (1) or failed (0).
+</p>
+<p>
+  <table border="4px" style = "border-collapse: collapse;">
+
+<tbody><tr>
+<th>Hours
+</th>
+<td>0.50</td>
+<td>0.75</td>
+<td>1.00</td>
+<td>1.25</td>
+<td>1.50</td>
+<td>1.75</td>
+<td>1.75</td>
+<td>2.00</td>
+<td>2.25</td>
+<td>2.50</td>
+<td>2.75</td>
+<td>3.00</td>
+<td>3.25</td>
+<td>3.50</td>
+<td>4.00</td>
+<td>4.25</td>
+<td>4.50</td>
+<td>4.75</td>
+<td>5.00</td>
+<td>5.50
+</td></tr>
+<tr>
+<th>Pass
+</th>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1
+</td></tr></tbody></table>
+</p>
+<p><b><h3>Making predictions</h3></b></p>
+<p>Let's use the same simple linear regression equation from our linear regression tutorial.</p>
+          <p>y = &beta;<sub>0</sub>+&beta;<sub>1</sub>Hours</p>
+          <p>&beta;<sub>0</sub> =  -0.27577401851260774
+          </p>
+          <p>
+            &beta;<sub>1</sub> = 0.25662305
+          </p>
+          <p> for Hours = [5, 0.75, 5.5]</p>
+          <p>respective y =[1.00734, -0.0833067, 1.13565]</p>
+<p>This time however we will transform the output(y) using the sigmoid function to return a probability(p) value between 0 and 1.</p>
+          <p>p=1/1+e<sup>-y</sup></p>
+          <p>After applying sigmoid to y</p>
+          <p> p =[0.73, 0.48, 0.76]</p>
+
+<p>If the model returns .73 it believes there is a 73% chance of passing. If our decision boundary was .5(can be varied), we would categorize this observation as 1.
+</p>
+<p> final class label =[1, 0, 1]</p>
+<p>
+  <table border="4px" style = "border-collapse: collapse;">
+    <tr><th>Hours of study</th><th>Pass Probability</th><th>Predicted Label</th></tr>
+    <tr><td>5</td><td>0.73</td><td>1</td></tr>
+    <tr><td>.75</td><td>0.48</td><td>0</td></tr>
+    <tr><td>5.5</td><td>0.76</td><td>1</td></tr>
+  </table>
+</p>
+
+<p>
+  <pre><code class="language-python">
+    #importing libraries
+    import numpy as np
+    import matplotlib.pyplot as plt
+    import pandas as pd
+
+    # Independent variable
+    X = np.array([0.50,0.75,1.00,1.25,1.50,1.75,1.75,2.00,2.25,2.50,2.75,3.00,3.25,3.50,4.00,4.25,4.50,4.75,5.00,5.50])
+
+    # Dependent variable
+    y = np.array([0,0,0,0,0,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1])
+
+    # Reshape X to 2D array scikit-learn will accept 2D input only
+    X = X.reshape(-1,1)
+
+    #split dataset into train , test
+    from sklearn.model_selection import train_test_split
+    X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.25, random_state = 0)
+
+    #importing LogisticRegression
+    from sklearn.linear_model import LogisticRegression
+
+    #create logisticRegression object
+    log_reg = LogisticRegression()
+
+    #train model
+    log_reg.fit(X_train,y_train)
+
+    #test model
+    y_pred = log_reg.predict(X_test)
+
+    # finding accuracy of the constructed model
+    from sklearn.metrics import accuracy_score
+    accuarcy = accuracy_score(y_test, y_pred)
+  </code></pre>
+</p>
+
+<p><b>Softmax regression</b></p>
+<p>The Logistic Regression model can be generalized to support multiple classes directly, without having to train and combine multiple binary classifiers. This is called Softmax Regression, or Multinomial Logistic Regression.
+</p>
+<p>The idea is quite simple: when given an instance x, the Softmax Regression model first computes a score s<sub>k</sub>(x) for each class k, then estimates the probability of each class by applying the softmax function (also called the normalized exponential) to the scores. The equation to compute s<sub>k</sub>(x) should look familiar, as it is just like the equation for Linear Regression prediction</p>
+<p>Equation: Softmax score for class k</p>
+<p>s<sub>k</sub>(x) =x<sup>T</sup>&theta;<sup>(k)</sup> </p>
+<p>Note that each class has its own dedicated parameter vector &theta;(k). All these vectors are typically stored as rows in a parameter matrix &Theta;.
+</p>
+<p>Once you have computed the score of every class for the instance x, you can estimate the probability p ^ k that the instance belongs to class k by running the scores through the softmax function:it computes the exponential of every score, then normalizes them (dividing by the sum of all the exponentials). The scores are generally called logits or log-odds (although they are actually unnormalized log-odds).</p>
+<p><b>Equation:Softmax function</b></p>
+<P>P<sub>k</sub> = &sigma;(s(x))<sub>k</sub> = exp(s<sub>k</sub>(x))/&Sigma;<sup>k</sup><sub>j=1</sub>exp(s<sub>j</sub>(x))</P>
+<p>K is the number of classes.</p>
+<p>s(x) is a vector containing the scores of each class for the instance x.</p>
+<p>&sigma;(s(x))k is the estimated probability that the instance x belongs to class k given the scores of each class for that instance.</p>
+<p>Just like the Logistic Regression classifier, the Softmax Regression classifier predicts the class with the highest estimated probability (which is simply the class with the highest score).</p>
+<p><b><p>Equation:Softmax Regression classifier prediction</p></b></p>
+
+<p>y = argmax<sub>k</sub>&sigma;(s(x))<sub>k</sub> = argmax<sub>k</sub>s<sub>k</sub>(x) = argmax<sub>k</sub>((&theta;<sup>(k)</sup>)<sup>T</sup>x)</p>
+<p>The argmax operator returns the value of a variable that maximizes a function. In this equation, it returns the value of k that maximizes the estimated probability &sigma;(s(x))k is a vector containing the scores of each class for the instance x.</p>
+<p>Now that you know how the model estimates probabilities and makes predictions, let's take a look at training. The objective is to have a model that estimates a high probability for the target class (and consequently a low probability for the other classes). Minimizing the cost function, called the cross entropy, should lead to this objective because it penalizes the model when it estimates a low probability for a target class. Cross entropy is frequently used to measure how well a set of estimated class probabilities match the target classes (we will use it again several times in the following chapters).
+</p>
+<p><b>Equation: Cross entropy cost function</b></p>
+
+<p>y<sub>k</sub><sup>(i)</sup> is the target probability that the ith instance belongs to class k. In general, it is either equal to 1 or 0, depending on whether the instance belongs to the class or not.</p>
+<p>Notice that when there are just two classes (K = 2), this cost function is equivalent to the Logistic Regression's cost function.</p>
+<p>The gradient vector of this cost function with regards to &theta;(k) is given by Equation:</p>
+<p><b>Equation: Cross entropy gradient vector for class k</b></p>
+<p>&Delta;<sub>&theta;</sub>(k)J(&Theta;) = 1/m &Sigma;<sup>m</sup><sub>i=1</sub>(p<sup>(i)</sup><sub>k</sub> - y<sup>(i)</sup><sub>k</sub>)x<sup>(i)</sup></p>
+<p>Now you can compute the gradient vector for every class, then use Gradient Descent (or any other optimization algorithm) to find the parameter matrix &Theta; that minimizes the cost function.</p>
+<p>Let's use Softmax Regression to classify the iris flowers into all three classes. Scikit-Learn's LogisticRegression uses one-versus-all by default when you train it on more than two classes, but you can set the multi_class hyperparameter to "multinomial" to switch it to Softmax Regression instead. You must also specify a solver that supports Softmax Regression, such as the "lbfgs" solver (see Scikit-Learn's documentation for more details). It also applies l2 regularization by default, which you can control using the hyperparameter C.</p>
+<P><i>Example code</i></P>
+<p>X = iris["data"][:, (2, 3)]  # petal length, petal width</p>
+<p>y = iris["target"]</p>
+<p>softmax_reg = LogisticRegression(multi_class="multinomial",solver="lbfgs", C=10)</p>
+<p>softmax_reg.fit(X, y)</p>
+
+<P>So the next time you find an iris with 5 cm long and 2 cm wide petals, you can ask your model to tell you what type of iris it is, and it will answer Iris-Virginica (class 2) with 94.2% probability (or Iris-Versicolor with 5.8% probability):</P>
+<p>>>> softmax_reg.predict([[5, 2]])</p>
+<p>array([2])</p>
+<p>>>> softmax_reg.predict_proba([[5, 2]])</p>
+<p>array([[6.38014896e-07, 5.74929995e-02, 9.42506362e-01]])</p>
+
+<p><b>Figure</b> shows the resulting decision boundaries, represented by the background colors. Notice that the decision boundaries between any two classes are linear. The figure also shows the probabilities for the Iris-Versicolor class, represented by the curved lines (e.g., the line labeled with 0.450 represents the 45% probability boundary). Notice that the model can predict a class that has an estimated probability below 50%. For example, at the point where all decision boundaries meet, all classes have an equal estimated probability of 33%.</p>

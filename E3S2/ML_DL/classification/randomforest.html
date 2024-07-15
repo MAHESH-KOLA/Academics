@@ -1,0 +1,42 @@
+<head>
+
+</head>
+<body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+  </script>
+<h2>Classification</h2>
+<p>
+  In machine learning and statistics, classification is the problem of identifying to which of a set of categories (sub-populations) a new observation belongs, on the basis of a training set of data containing observations (or instances) whose category membership is known.
+
+</p>
+<p> Example is assigning a given email to the "spam" or "non-spam" class</p>
+<p>An algorithm that implements classification, especially in a concrete implementation, is known as a classifier. The term "classifier" sometimes also refers to the mathematical function, implemented by a classification algorithm, that maps input data to a category. </p>
+<h3>Random Forest Classifier</h3>
+<p>Random forests or random decision forests are an ensemble learning method for classification. It operates by constructing a multitude of decision trees at training time and outputting the class that is the mode of the classes (classification)</p>
+<p>Random decision forests correct for decision trees' habit of overfitting to their training set</p>
+<p>In particular, trees that are grown very deep tend to learn highly irregular patterns: they overfit their training sets, i.e. have low bias, but very high variance. Random forests are a way of averaging multiple deep decision trees, trained on different parts of the same training set, with the goal of reducing the variance</p>
+<h3>Bootstrap aggregating(Bagging)</h3>
+<p>Bagging is a technique designed to improve the stability and accuracy of machine learning algorithms. It reduces variance and helps to avoid overfitting</p>
+<p>Given a standard training set D  of size N, bagging generates M new training sets D<sub>m</sub> here m = 1,2....M, each of size N', by sampling from training set uniformly and with replacement. By sampling with replacement, some observations may be repeated in each D<sub>m</sub>. This kind of sample is known as a bootstrap sample.</p>
+<p>Then, m models are fitted using the above m bootstrap samples by taking majority voting (for classification) final decision will be taken.</p>
+<p><img src="bagging.png" alt=""></p>
+<h3>From bagging to random forests</h3>
+<p>The above procedure describes the original bagging algorithm for trees. Random forests differ in only one way from this general scheme: they use a modified tree learning algorithm that selects, at each candidate split a random subset of the features.</p>
+<p>Typically, for a classification problem with p features, sqrt(p) (rounded down) features are used in each split.</p>
+<h3>Algorithm</h3>
+<p>
+  Random Forest constructed using the following algorithm:
+</p>
+<ul>
+  <li>  Let the number of training points be N and the number of features in the training data be F.
+  <li>  Choose M to be the number of individual(Decision Tree) models in the ensemble(Random Forest).
+  <li>  For each individual(Decision Tree) model m (1&lt;m&lt;M), choose n<sub>m</sub> (n<sub>m</sub> < N) to be the number of input samples. It is common to have only one value of n<sub>m</sub> for all the individual (Decision Tree) models.
+  <li>  For each individual(Decision Tree) model m, create a training set by choosing n<sub>f</sub> (1&lt;f&lt;F) features from F with replacement and train the model.
+</ul>
+<p>
+Now, to apply the ensemble(Random Forest) model to an unseen data, combine the outputs of the M individual(Decision Tree) models by majority voting
+</p>
